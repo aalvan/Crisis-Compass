@@ -1,14 +1,23 @@
-const { Sequelize: Connection } = require('sequelize')
+const { Sequelize } = require('sequelize')
 
 const  { config } = require('../config/config')
 
-const USER = encodeURIComponent(config.dbUSER)
+const USERNAME = encodeURIComponent(config.dbUSER)
 const PASSWORD = encodeURIComponent(config.dbPassword)
-const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.db_Port}/${config.db_Name}`
+const DB = encodeURIComponent(config.dbName)
+const HOST = encodeURIComponent(config.dbHost)
+const sequelize = new Sequelize(DB, USERNAME, PASSWORD, {
+    host: HOST,
+    dialect: 'postgres'
+})
 
-const sequelize = new Connection(URI, {
-    dialect: 'postgres',
-    logging: true,
-});
+// Test the connection
+sequelize.authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
 
-module.exports = sequelize;
+module.exports = { sequelize };

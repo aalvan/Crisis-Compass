@@ -1,13 +1,13 @@
 import userActions from '../../actions/user/user'
 import {message} from "koa/lib/response";
 
-exports.getAllUsers = (ctx) =>{
-    ctx.body = userActions.getUsers()
+exports.getAllUsers = async (ctx) =>{
+    ctx.body = await userActions.getUsers()
     return ctx
 }
 
-exports.getUser = (ctx) => {
-    const user = userActions.getUser(Number(ctx.params.id))
+exports.getUser = async (ctx) => {
+    const user = await userActions.getUser(Number(ctx.params.id))
     if (user.length!==0) {
         ctx.body = user
         return ctx
@@ -20,21 +20,21 @@ exports.getUser = (ctx) => {
     
 }
 
-exports.createUser = (ctx) => {
+exports.createUser = async (ctx) => {
     const body = ctx.request.body
     if (!body || Object.keys(body).length === 0) {
         ctx.status = 400
         ctx.body = { message: 'User data is missing' }
         return ctx
     }
-    userActions.addUser(ctx.request.body)
+    await userActions.addUser(ctx.request.body)
     ctx.body = {status: 200,
         message: 'User was created'
     }
 }
 
-exports.deleteUser = (ctx) => {
-    userActions.removeUser(ctx.params.id)
+exports.deleteUser = async (ctx) => {
+    await userActions.removeUser(ctx.params.id)
     ctx.body = {
         status: 200,
         message: " User was deleted"
