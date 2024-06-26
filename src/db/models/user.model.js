@@ -48,10 +48,10 @@ const User = sequelize.define('users', {
         field: 'updated_at',
         defaultValue: Sequelize.NOW
     }
-}, {
+},
+    {
     timestamps: true
 });
-
 sequelize.sync()
     .then(() => {
         console.log('Database & tables created!');
