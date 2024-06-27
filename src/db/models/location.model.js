@@ -26,6 +26,7 @@ const Location = sequelize.define('locations', {
         },
         locationType:{
             allowNull: false,
+            field: 'location_type',
             type: DataTypes.BOOLEAN
         },
         createdAt: {

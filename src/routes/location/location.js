@@ -1,6 +1,6 @@
 import locationActions from '../../actions/location/location'
 
-exports.getAllLocation = (ctx) => {
-    ctx.body = locationActions.getLocations()
+exports.getAllLocations = async (ctx) => {
+    ctx.body = await locationActions.getLocations()
     return ctx
 }

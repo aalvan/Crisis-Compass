@@ -1,6 +1,6 @@
 const Users = require("../../db/models/user.model")
 
-exports.getUsers = async(userId) => {
+exports.getUsers = async() => {
     try{
         let data = await Users.findAll({
             attributes:[
