@@ -14,7 +14,7 @@ exports.getUser = async (ctx) => {
     } else {
         ctx.status = 404
         ctx.body = {
-            message: "Usuario no encontrado"
+            message: "User was not found"
         }
     }
     

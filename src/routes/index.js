@@ -7,6 +7,10 @@ router.get('/api/users', users.getAllUsers)
 router.get('/api/user/:id', users.getUser)
 router.post('/api/user', users.createUser)
 router.delete('/api/user/:id', users.deleteUser)
+
 router.get('/api/locations', locations.getAllLocations)
+router.get('/api/location/:id', locations.getLocation)
+router.post('/api/location', locations.createLocation)
+router.delete('/api/location/:id', locations.deleteLocation)
 
 export default router

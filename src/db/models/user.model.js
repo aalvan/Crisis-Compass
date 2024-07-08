@@ -28,6 +28,14 @@ const User = sequelize.define('users', {
         allowNull: false,
         type: DataTypes.STRING
     },
+    mail: {
+        allowNull: false,
+        type: DataTypes.STRING
+    },
+    password: {
+        allowNull: false,
+        type: DataTypes.STRING
+    },
     assigned_location_id: {
         allowNull: false,
         type: DataTypes.INTEGER
