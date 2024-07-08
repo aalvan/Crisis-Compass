@@ -40,3 +40,19 @@ exports.deleteUser = async (ctx) => {
         message: " User was deleted"
     }
 }
+
+exports.updateUser = async (ctx) => {
+    const userId = ctx.params.id;
+    const body = ctx.request.body;
+
+    if (!body || Object.keys(body).length === 0) {
+        ctx.status = 400;
+        ctx.body = { message: 'User data is missing' };
+        return;
+    }
+
+    const result = await userActions.updateUser(userId, body);
+
+    ctx.status = 200;
+    ctx.body = { message: result.message, user: result.user || undefined };
+};
