@@ -1,5 +1,9 @@
 const { Sequelize, DataTypes} = require('sequelize')
 const { sequelize } = require('../connection')
+const Location = require('./location.model');
+const bcrypt = require('bcrypt');
+
+
 
 const User = sequelize.define('users', {
     id: {
@@ -56,10 +60,25 @@ const User = sequelize.define('users', {
         field: 'updated_at',
         defaultValue: Sequelize.NOW
     }
-},
-    {
-    timestamps: true
+}, {
+    timestamps: true,
+    hooks: {
+        beforeCreate: async (user) => {
+            if (user.password) {
+                const salt = await bcrypt.genSalt(10);
+                user.password = await bcrypt.hash(user.password, salt);
+            }
+        },
+        beforeUpdate: async (user) => {
+            if (user.password) {
+                const salt = await bcrypt.genSalt(10);
+                user.password = await bcrypt.hash(user.password, salt);
+            }
+        }
+    }
 });
+// Define the relationship
+User.belongsTo(Location, { foreignKey: 'locationId' });
 sequelize.sync()
     .then(() => {
         console.log('Database & tables created!');

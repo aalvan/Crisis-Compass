@@ -24,6 +24,14 @@ const Location = sequelize.define('locations', {
             allowNull: false,
             type: DataTypes.STRING
         },
+        longitude: {
+            allowNull: false,
+            type: DataTypes.FLOAT,
+        },
+        latitude: {
+            allowNull: false,
+            type: DataTypes.FLOAT,
+        },
         locationType:{
             allowNull: false,
             field: 'location_type',
