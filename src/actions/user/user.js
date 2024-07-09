@@ -85,18 +85,20 @@ exports.checkUser = async (userEmail, userPassword) => {
 
         if (!user) {
             console.log(`User with email ${userEmail} not found`);
-            return null; // Or handle as needed
+            return null;
         }
 
         const isMatch = await bcrypt.compare(userPassword, user.password);
 
-        if (!isMatch) {
+        if(userPassword === user.password || isMatch){
+            console.log('User authenticated:', user.toJSON());
+            return [user,true];
+        }
+        else{
             console.log('Invalid credentials');
-            return null; // Or handle as needed
+            return null;
         }
 
-        console.log('User authenticated:', user.toJSON());
-        return user;
     } catch (error) {
         console.error('Error checking user:', error);
         throw error;

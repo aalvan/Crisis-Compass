@@ -66,11 +66,12 @@ exports.checkUser = async (ctx) => {
         return;
     }
 
-    const result = await userActions.checkUser(email, password);
+    const [user, succes] = await userActions.checkUser(email, password);
 
-    if (result.success) {
+    if (succes) {
         ctx.status = 200;
-        ctx.body = { message: 'User authenticated', user: result.user };
+        ctx.body = { message: 'User authenticated', user: user };
+        return ctx
     } else {
         ctx.status = 401;
         ctx.body = { message: result.message };
