@@ -102,3 +102,13 @@ exports.checkUser = async (userEmail, userPassword) => {
         throw error;
     }
 };
+
+exports.userByLocation = async (idLocation) => {
+    try{
+        let data = await Users.findAll({ where: { assigned_location_id: idLocation } });
+        return data
+    }catch (error){
+        console.log(error)
+        return error
+    }
+}

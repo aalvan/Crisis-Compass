@@ -76,3 +76,17 @@ exports.checkUser = async (ctx) => {
         ctx.body = { message: result.message };
     }
 };
+
+exports.getUserByLocation = async (ctx) => {
+    const user = await userActions.userByLocation(Number(ctx.params.id))
+    if (user.length!==0) {
+        ctx.body = user
+        return ctx
+    } else {
+        ctx.status = 404
+        ctx.body = {
+            message: "User was not found"
+        }
+    }
+    
+}
