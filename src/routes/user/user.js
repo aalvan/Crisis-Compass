@@ -56,3 +56,23 @@ exports.updateUser = async (ctx) => {
     ctx.status = 200;
     ctx.body = { message: result.message, user: result.user || undefined };
 };
+
+exports.checkUser = async (ctx) => {
+    const { email, password } = ctx.request.body;
+
+    if (!email || !password) {
+        ctx.status = 400;
+        ctx.body = { message: 'Email and password are required' };
+        return;
+    }
+
+    const result = await userActions.checkUser(email, password);
+
+    if (result.success) {
+        ctx.status = 200;
+        ctx.body = { message: 'User authenticated', user: result.user };
+    } else {
+        ctx.status = 401;
+        ctx.body = { message: result.message };
+    }
+};

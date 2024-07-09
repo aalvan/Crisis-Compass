@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const Users = require("../../db/models/user.model")
 
 exports.getUsers = async() => {
@@ -74,6 +75,30 @@ exports.updateUser = async (userId, updatedData) => {
         return user;
     } catch (error) {
         console.error('Error updating user:', error);
+        throw error;
+    }
+};
+
+exports.checkUser = async (userEmail, userPassword) => {
+    try {
+        const user = await Users.findOne({ where: { mail: userEmail } });
+
+        if (!user) {
+            console.log(`User with email ${userEmail} not found`);
+            return null; // Or handle as needed
+        }
+
+        const isMatch = await bcrypt.compare(userPassword, user.password);
+
+        if (!isMatch) {
+            console.log('Invalid credentials');
+            return null; // Or handle as needed
+        }
+
+        console.log('User authenticated:', user.toJSON());
+        return user;
+    } catch (error) {
+        console.error('Error checking user:', error);
         throw error;
     }
 };

@@ -8,6 +8,7 @@ router.get('/api/user/:id', users.getUser)
 router.put('/api/users/:id', users.updateUser);
 router.post('/api/user', users.createUser)
 router.delete('/api/user/:id', users.deleteUser)
+router.post('/users/check', users.checkUser);
 
 router.get('/api/locations', locations.getAllLocations)
 router.get('/api/location/:id', locations.getLocation)
