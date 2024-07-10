@@ -7,6 +7,8 @@ exports.getCollectionCenters = async() => {
                 'id',
                 'name',
                 'description',
+                'schedule',
+                'locationId',
                 'createdAt',
                 'updatedAt'
             ]
@@ -18,9 +20,9 @@ exports.getCollectionCenters = async() => {
     }
 }
 
-exports.getCollectionCenter = async (CollectionCenterId) => {
+exports.getCollectionCenter = async (collectionCenterId) => {
     try{
-        let data = await CollectionCenters.findByPk(CollectionCenterId);
+        let data = await CollectionCenters.findByPk(collectionCenterId);
         return data
     }catch (error){
         console.log(error)
@@ -28,12 +30,12 @@ exports.getCollectionCenter = async (CollectionCenterId) => {
     }
 }
 
-exports.removeCollectionCenter = async (CollectionCenterId) => {
+exports.removeCollectionCenter = async (collectionCenterId) => {
     try {
-        const CollectionCenter = await CollectionCenters.findByPk(CollectionCenterId);
+        const collectionCenter = await CollectionCenters.findByPk(collectionCenterId);
 
-        if (CollectionCenter) {
-            await CollectionCenter.destroy();
+        if (collectionCenter) {
+            await collectionCenter.destroy();
         }
     } catch (error) {
         console.error('Error deleting CollectionCenter:', error);
@@ -44,8 +46,9 @@ exports.addCollectionCenter = async (dataCollectionCenter) => {
     try {
         const newCollectionCenter = await CollectionCenters.create({
             name: dataCollectionCenter.name,
-            CollectionCenterType: dataCollectionCenter.CollectionCenterType,
             description: dataCollectionCenter.description,
+            schedule: dataCollectionCenter.schedule,
+            locationId: dataCollectionCenter.locationId
         });
         console.log('New CollectionCenter created:', newCollectionCenter.toJSON());
     }catch (error) {
@@ -53,17 +56,17 @@ exports.addCollectionCenter = async (dataCollectionCenter) => {
     }
 }
 
-exports.updateCollectionCenter = async (CollectionCenterId, updatedData) => {
+exports.updateCollectionCenter = async (collectionCenterId, updatedData) => {
     try {
-        const CollectionCenter = await CollectionCenters.findByPk(CollectionCenterId);
+        const collectionCenter = await CollectionCenters.findByPk(collectionCenterId);
 
-        if (!CollectionCenter) {
-            console.log(`CollectionCenter with ID ${CollectionCenterId} not found`)
+        if (!collectionCenter) {
+            console.log(`CollectionCenter with ID ${collectionCenterId} not found`)
             return null;
         }
-        await CollectionCenter.update(updatedData);
-        console.log('CollectionCenter updated:', CollectionCenter.toJSON())
-        return CollectionCenter;
+        await collectionCenter.update(updatedData);
+        console.log('CollectionCenter updated:', collectionCenter.toJSON())
+        return collectionCenter;
     } catch (error) {
         console.error('Error updating CollectionCenter:', error);
         throw error;
