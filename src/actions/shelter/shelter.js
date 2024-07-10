@@ -78,7 +78,8 @@ exports.updateShelter = async (shelterId, updatedData) => {
 
 exports.shelterByLocation = async (idLocation) => {
     try{
-        let data = await Shelters.findAll({ where: { locationId: idLocation } });
+        //REVISAR
+        let data = await Shelters.findOne({ where: { locationId: idLocation } });
         return data
     }catch (error){
         console.log(error)

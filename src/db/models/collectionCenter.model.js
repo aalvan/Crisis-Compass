@@ -19,15 +19,15 @@ const CollectionCenterModel = sequelize.define('collection_center', {
         allowNull: true,
         type: DataTypes.TEXT
     },
+    schedule:{
+        allowNull: false,
+        type: DataTypes.STRING
+    },
     createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
         field: 'created_at',
         defaultValue: Sequelize.NOW
-    },
-    schedule:{
-        allowNull: false,
-        type: DataTypes.STRING
     },
     updatedAt: {
         allowNull: false,

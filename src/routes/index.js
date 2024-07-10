@@ -3,6 +3,7 @@ import users from './user/user'
 import locations from './location/location'
 import items from './item/item'
 import shelters from './shelter/shelter'
+import collectionCenters from "./collectionCenter/collectionCenter"
 const router = new Router()
 
 // User endpoints
@@ -35,5 +36,13 @@ router.put('/api/shelter/:id', shelters.updateShelter)
 router.post('/api/shelter', shelters.createShelter)
 router.delete('/api/shelter/:id', shelters.deleteShelter)
 router.get('/api/shelterslocation/:id', shelters.getShelterByLocation)
+
+// CollectionCenter endpoints
+router.get('/api/collectioncenters', collectionCenters.getAllCollectionCenters)
+router.get('/api/collectioncenter/:id', collectionCenters.getCollectionCenter)
+router.put('/api/collectioncenter/:id', collectionCenters.updateCollectionCenter)
+router.post('/api/collectioncenter', collectionCenters.createCollectionCenter)
+router.delete('/api/collectioncenter/:id', collectionCenters.deleteCollectionCenter)
+//router.get('/api/shelterslocation/:id', collectionCenters.getCollectionCentersByLocation)
 
 export default router
