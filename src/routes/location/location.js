@@ -39,3 +39,19 @@ exports.deleteLocation = async (ctx) => {
         message: " Location was deleted"
     }
 }
+
+exports.updateLocation = async (ctx) => {
+    const locationId = ctx.params.id;
+    const body = ctx.request.body;
+
+    if (!body || Object.keys(body).length === 0) {
+        ctx.status = 400;
+        ctx.body = { message: 'Location data is missing' };
+        return;
+    }
+
+    const result = await locationActions.updateLocation(locationId, body);
+
+    ctx.status = 200;
+    ctx.body = { message: "Item was updated"};
+};

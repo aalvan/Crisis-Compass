@@ -1,5 +1,4 @@
 import userActions from '../../actions/user/user'
-import {message} from "koa/lib/response";
 
 exports.getAllUsers = async (ctx) =>{
     ctx.body = await userActions.getUsers()

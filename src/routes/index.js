@@ -17,6 +17,7 @@ router.get('/api/userslocation/:id', users.getUserByLocation) //revisar esto
 // Location endpoints
 router.get('/api/locations', locations.getAllLocations)
 router.get('/api/location/:id', locations.getLocation)
+router.put('/api/location/:id', locations.updateLocation)
 router.post('/api/location', locations.createLocation)
 router.delete('/api/location/:id', locations.deleteLocation)
 
