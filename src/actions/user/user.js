@@ -68,7 +68,7 @@ exports.updateUser = async (userId, updatedData) => {
 
         if (!user) {
             console.log(`User with ID ${userId} not found`)
-            return null; // Or handle as needed
+            return null;
         }
         await user.update(updatedData);
         console.log('User updated:', user.toJSON())
@@ -85,7 +85,7 @@ exports.checkUser = async (userEmail, userPassword) => {
 
         if (!user) {
             console.log(`User with email ${userEmail} not found`);
-            return null;
+            return [null,false];
         }
 
         const isMatch = await bcrypt.compare(userPassword, user.password);
@@ -96,7 +96,7 @@ exports.checkUser = async (userEmail, userPassword) => {
         }
         else{
             console.log('Invalid credentials');
-            return null;
+            return [null,false];
         }
 
     } catch (error) {

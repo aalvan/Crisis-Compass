@@ -54,28 +54,37 @@ exports.updateUser = async (ctx) => {
     const result = await userActions.updateUser(userId, body);
 
     ctx.status = 200;
-    ctx.body = { message: result.message, user: result.user || undefined };
+    ctx.body = { message: "Item was updated"};
 };
 
 exports.checkUser = async (ctx) => {
-    const { email, password } = ctx.request.body;
 
-    if (!email || !password) {
-        ctx.status = 400;
-        ctx.body = { message: 'Email and password are required' };
-        return;
+    try{
+        const { email, password } = ctx.request.body;
+
+        if (!email || !password) {
+            ctx.status = 400;
+            ctx.body = { message: 'Email and password are required' };
+            return;
+        }
+
+        const [user, succes] = await userActions.checkUser(email, password);
+
+        if (succes) {
+            ctx.status = 200;
+            ctx.body = { message: 'User authenticated', user: user };
+            return ctx
+        } else {
+            ctx.status = 401;
+            ctx.body = { message: "Invalid credentials" };
+            return ctx
+        }
+    }catch (error){
+        console.error('Error during user authentication:', error);
+        ctx.status = 500;
+        ctx.body = { message: 'Internal server error' };
     }
 
-    const [user, succes] = await userActions.checkUser(email, password);
-
-    if (succes) {
-        ctx.status = 200;
-        ctx.body = { message: 'User authenticated', user: user };
-        return ctx
-    } else {
-        ctx.status = 401;
-        ctx.body = { message: result.message };
-    }
 };
 
 exports.getUserByLocation = async (ctx) => {

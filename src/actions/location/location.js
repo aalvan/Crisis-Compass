@@ -1,5 +1,4 @@
 const Locations = require("../../db/models/location.model")
-const Users = require("../../db/models/user.model");
 
 exports.getLocations = async() => {
     try{
@@ -46,7 +45,7 @@ exports.removeLocation = async (locationId) => {
 
 exports.addLocation = async (dataLocation) => {
     try {
-        const newLocation = await Users.create({
+        const newLocation = await Locations.create({
             name: dataLocation.name,
             address: dataLocation.address,
             region: dataLocation.region,

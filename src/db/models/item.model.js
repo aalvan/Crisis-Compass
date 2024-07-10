@@ -12,6 +12,11 @@ const Item = sequelize.define('items', {
         allowNull: false,
         type: DataTypes.STRING
     },
+    itemType:{
+        allowNull: false,
+        type: DataTypes.STRING,
+        field: 'item_type'
+    },
     description: {
         allowNull: true,
         type: DataTypes.TEXT

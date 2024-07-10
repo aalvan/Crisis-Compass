@@ -21,6 +21,11 @@ const Shelter = sequelize.define('shelters', {
         allowNull: false,
         type: DataTypes.INTEGER
     },
+    maxCapacity: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        field: 'max_capacity'
+    },
     createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
