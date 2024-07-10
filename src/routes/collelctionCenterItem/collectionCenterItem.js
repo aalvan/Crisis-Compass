@@ -19,14 +19,14 @@ exports.getCollectionCenterItem = async (ctx) => {
 
 }
 
-exports.createCollectionCenterItemItem = async (ctx) => {
+exports.createCollectionCenterItem = async (ctx) => {
     const body = ctx.request.body
     if (!body || Object.keys(body).length === 0) {
         ctx.status = 400
         ctx.body = { message: 'CollectionCenterItemItem data is missing' }
         return ctx
     }
-    await CollectionCenterItemItemActions.addCollectionCenterItemItem(ctx.request.body)
+    await CollectionCenterItemActions.addCollectionCenterItem(ctx.request.body)
     ctx.body = {status: 200,
         message: 'CollectionCenterItemItem was created'
     }

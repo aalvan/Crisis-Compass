@@ -1,4 +1,4 @@
-const CollectionCenterItems = require("../../db/models/collectionCenterItemItem.model");
+const CollectionCenterItems = require("../../db/models/collectionCenterItem.model");
 
 exports.getCollectionCenterItems = async() => {
     try{
